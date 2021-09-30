@@ -1,4 +1,7 @@
-﻿namespace AD
+﻿using System.Collections;
+using System.Linq;
+
+namespace AD
 {
     public partial class MyArrayList : IMyArrayList
     {
@@ -7,51 +10,80 @@
 
         public MyArrayList(int capacity)
         {
-            // Write implementation here
-            // Something something test
-            throw new System.NotImplementedException();
+            data = new int[capacity];
+            size = capacity;
         }
 
-        public void Add(int n)
-        {
-            // Write implementation here
-            throw new System.NotImplementedException();
+        public void Add(int n) {
+            for (int i = 0; i < size; i++) {
+                if (data[i] == 0) {
+                    data[i] = n;
+                    return;
+                }
+            }
+
+            throw new MyArrayListFullException();
         }
 
         public int Get(int index)
         {
-            // Write implementation here
-            throw new System.NotImplementedException();
+            if (index >= 0 && index < size) {
+                if (data[index] != 0) {
+                    return data[index];
+                }
+                throw new MyArrayListIndexOutOfRangeException();
+            }
+            throw new MyArrayListIndexOutOfRangeException();
         }
 
         public void Set(int index, int n)
         {
-            // Write implementation here
-            throw new System.NotImplementedException();
+            if (index >= 0 && index < size) {
+                if (data[index] != 0) {
+                    data[index] = n;
+                }
+                else {
+                    throw new MyArrayListIndexOutOfRangeException();
+                }
+            }
+            else {
+                throw new MyArrayListIndexOutOfRangeException();
+            }
         }
 
-        public int Capacity()
-        {
-            // Write implementation here
-            throw new System.NotImplementedException();
+        public int Capacity() {
+            return size;
         }
 
-        public int Size()
-        {
-            // Write implementation here
-            throw new System.NotImplementedException();
+        public int Size() {
+            return data.TakeWhile(number => number != 0).Count();
         }
 
         public void Clear()
         {
-            // Write implementation here
-            throw new System.NotImplementedException();
+            data = new int[size - 1];
         }
 
-        public int CountOccurences(int n)
-        {
-            // Write implementation here
-            throw new System.NotImplementedException();
+        public int CountOccurences(int n) {
+            var count = data.Count(number => number == n);
+            return count;
+        }
+        public override string ToString() {
+            var fullString = "";
+            if (Size() > 0) {
+                fullString += "[" + data[0];
+                if (Size() > 1) {
+                    for (var i = 1; i < Size(); i++) {
+                        fullString += "," + data[i];
+                    }
+                }
+                fullString += "]";
+            }
+            else {
+                fullString = "NIL";
+            }
+
+            return fullString;
         }
     }
 }
