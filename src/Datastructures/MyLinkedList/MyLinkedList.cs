@@ -7,44 +7,91 @@
 
         public MyLinkedList()
         {
-            // Write implementation here
-            throw new System.NotImplementedException();
+            size = 0;
         }
 
         public void AddFirst(T data)
         {
-            // Write implementation here
-            throw new System.NotImplementedException();
+            MyLinkedListNode<T> newNode = new MyLinkedListNode<T>()
+            {
+                data = data
+            };
+            if (size != 0)
+            {
+                newNode.next = first;
+            }
+
+            first = newNode;
+            size++;
         }
 
         public T GetFirst()
         {
-            // Write implementation here
-            throw new System.NotImplementedException();
+            if (size == 0)
+            {
+                throw new MyLinkedListEmptyException();
+            }
+
+            return first.data;
         }
 
         public void RemoveFirst()
         {
-            // Write implementation here
-            throw new System.NotImplementedException();
+            if (size == 0)
+            {
+                throw new MyLinkedListEmptyException();
+            }
+
+            MyLinkedListNode<T> node = first.next;
+            first = node;
+            size--;
         }
 
         public int Size()
         {
-            // Write implementation here
-            throw new System.NotImplementedException();
+            return size;
         }
 
         public void Clear()
         {
-            // Write implementation here
-            throw new System.NotImplementedException();
+            this.first = null;
+            size = 0;
         }
 
         public void Insert(int index, T data)
         {
-            // Write implementation here
-            throw new System.NotImplementedException();
+            if (index < 0 || index > size)
+            {
+                throw new MyLinkedListIndexOutOfRangeException();
+            }
+
+            if (index == 0)
+            {
+                AddFirst(data);
+                return;
+            }
+
+            MyLinkedListNode<T> newNode = new MyLinkedListNode<T>();
+            MyLinkedListNode<T> firstNode = first;
+            MyLinkedListNode<T> insertNode = new MyLinkedListNode<T>()
+            {
+                data = data
+            };
+
+            for (int i = 0; i < index + 1; i++)
+            {
+                if (i == index)
+                {
+                    insertNode.next = newNode.next;
+                    newNode.next = newNode;
+                    size++;
+                }
+                if (firstNode != null)
+                {
+                    newNode.next = firstNode.next;
+                    firstNode = firstNode.next;
+                }
+            }
         }
 
         public override string ToString()
