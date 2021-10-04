@@ -11,57 +11,48 @@ namespace AD
         public MyArrayList(int capacity)
         {
             data = new int[capacity];
-            size = capacity;
+            size = 0;
         }
 
         public void Add(int n) {
-            for (int i = 0; i < size; i++) {
-                if (data[i] == 0) {
-                    data[i] = n;
-                    return;
-                }
+            if (size >= data.Length) {
+                throw new MyArrayListFullException();
             }
 
-            throw new MyArrayListFullException();
+            data[size] = n;
+            size++;
         }
 
         public int Get(int index)
         {
-            if (index >= 0 && index < size) {
-                if (data[index] != 0) {
-                    return data[index];
-                }
+            if (index < 0 || index > (size - 1) || size == 0) {
                 throw new MyArrayListIndexOutOfRangeException();
             }
-            throw new MyArrayListIndexOutOfRangeException();
+
+            return data[index];
         }
 
         public void Set(int index, int n)
         {
-            if (index >= 0 && index < size) {
-                if (data[index] != 0) {
-                    data[index] = n;
-                }
-                else {
-                    throw new MyArrayListIndexOutOfRangeException();
-                }
-            }
-            else {
+            if (index < 0 || index > (size - 1)) {
                 throw new MyArrayListIndexOutOfRangeException();
             }
+
+            data[index] = n;
         }
 
         public int Capacity() {
-            return size;
+            return data.Length;
         }
 
         public int Size() {
-            return data.TakeWhile(number => number != 0).Count();
+            return size;
         }
 
         public void Clear()
         {
-            data = new int[size - 1];
+            data = new int[data.GetLength(0)];
+            size = 0;
         }
 
         public int CountOccurences(int n) {

@@ -16,9 +16,21 @@ namespace AD
         /// <param name="s">The string to check</param>
         /// <returns>Returns True if all '(' are matched by ')'.
         /// Returns False otherwise.</returns>
-        public static bool CheckBrackets(string s)
-        {
-            throw new System.NotImplementedException();
+        public static bool CheckBrackets(string s) {
+            var myStack = new MyStack<char>();
+            foreach (var c in s) {
+                switch (c) {
+                    case '(':
+                        myStack.Push('(');
+                        break;
+                    case ')' when myStack.Top() == '(':
+                        myStack.Pop();
+                        break;
+                    case ')':
+                        return false;
+                }
+            }
+            return true;
         }
 
 

@@ -1,4 +1,6 @@
-﻿namespace AD
+﻿using System.Runtime.InteropServices;
+
+namespace AD
 {
     public partial class MyLinkedList<T> : IMyLinkedList<T>
     {
@@ -71,7 +73,7 @@
                 return;
             }
 
-            MyLinkedListNode<T> newNode = new MyLinkedListNode<T>();
+            MyLinkedListNode<T> newNode = null;
             MyLinkedListNode<T> firstNode = first;
             MyLinkedListNode<T> insertNode = new MyLinkedListNode<T>()
             {
@@ -82,13 +84,17 @@
             {
                 if (i == index)
                 {
-                    insertNode.next = newNode.next;
-                    newNode.next = newNode;
-                    size++;
+                    if (newNode != null) {
+                        insertNode.next = newNode.next;
+                        newNode.next = insertNode;
+                        size++;
+                    }
                 }
+
+                //Create newNode to insert into
                 if (firstNode != null)
                 {
-                    newNode.next = firstNode.next;
+                    newNode = firstNode;
                     firstNode = firstNode.next;
                 }
             }
@@ -96,8 +102,23 @@
 
         public override string ToString()
         {
-            // Write implementation here
-            throw new System.NotImplementedException();
+           var fullString = "NIL";
+           if (size > 0) {
+               MyLinkedListNode<T> traverseNode = first;
+               fullString = "[";
+
+               for (int i = 0; i < size; i++) {
+                   fullString += traverseNode.data;
+
+                   if (i < this.size - 1) {
+                       fullString += ",";
+                   }
+
+                   traverseNode = traverseNode.next;
+               }
+               fullString += "]";
+           }
+           return fullString;
         }
     }
 }
