@@ -4,9 +4,14 @@ namespace AD
 {
     public partial class MyQueue<T> : IMyQueue<T>
     {
+        MyLinkedList<T> linkedList;
+
+        public MyQueue() {
+            linkedList = new MyLinkedList<T>();
+        }
         public bool IsEmpty()
         {
-            throw new System.NotImplementedException();
+            return true;
         }
 
         public void Enqueue(T data)

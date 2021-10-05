@@ -54,23 +54,21 @@ namespace AD
             var myStack = new MyStack<char>();
             foreach (var c in s) {
                 switch (c) {
-                    case '(':
+                    case '(': 
                     case '{': 
                     case '[':
                         myStack.Push(c);
                         continue;
                     case ')' when myStack.IsEmpty() || myStack.Top() != '(':
+                    case '}' when myStack.IsEmpty() || myStack.Top() != '{':
+                    case ']' when myStack.IsEmpty() || myStack.Top() != '[':
                         return false;
                     case ')':
                         myStack.Pop();
                         break;
-                    case '}' when myStack.IsEmpty() || myStack.Top() != '{':
-                        return false;
                     case '}':
                         myStack.Pop();
                         break;
-                    case ']' when myStack.IsEmpty() || myStack.Top() != '[':
-                        return false;
                     case ']':
                         myStack.Pop();
                         break;
