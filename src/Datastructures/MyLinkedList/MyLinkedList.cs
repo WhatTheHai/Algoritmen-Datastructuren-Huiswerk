@@ -33,13 +33,17 @@ namespace AD
             {
                 data = data
             };
-            MyLinkedListNode<T> traverseNode = first;
-            while (traverseNode.next != null)
-            {
-                traverseNode = traverseNode.next;
+            if (first != null) {
+                MyLinkedListNode<T> traverseNode = first;
+                while (traverseNode.next != null) {
+                    traverseNode = traverseNode.next;
+                }
+                traverseNode.next = newNode;
+                size++;
             }
-
-            traverseNode.next = newNode;
+            else {
+                AddFirst(data);
+            }
         }
 
         public T GetFirst()

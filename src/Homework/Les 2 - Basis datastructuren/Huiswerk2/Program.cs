@@ -152,8 +152,8 @@
             Ex1ArrayList();
             Ex2LinkedList();
             Ex3Stack();
-            // Ex4BracketChecker();
-            // Ex5Queue();
+            Ex4BracketChecker();
+            Ex5Queue();
         }
     }
 }

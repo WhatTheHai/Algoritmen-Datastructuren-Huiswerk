@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
@@ -5,31 +6,41 @@ namespace AD
 {
     public partial class MyQueue<T> : IMyQueue<T>
     {
-        MyLinkedList<T> linkedList;
+        MyLinkedList<T> queue;
 
         public MyQueue() {
-            linkedList = new MyLinkedList<T>();
+            queue = new MyLinkedList<T>();
         }
         public bool IsEmpty()
         {
-            return linkedList.Size() == 0;
+            return queue.Size() == 0;
         }
 
         public void Enqueue(T data)
         {
-            linkedList.AddLast(data);
+            queue.AddLast(data);
         }
 
         public T GetFront()
         {
-            return linkedList.GetFirst();
+            try {
+                return queue.GetFirst();
+            }
+            catch (MyLinkedListEmptyException) {
+                throw new MyQueueEmptyException();
+            }
         }
 
         public T Dequeue()
         {
-            var data = linkedList.GetFirst();
-            linkedList.RemoveFirst();
-            return data;
+            try {
+                var data = queue.GetFirst();
+                queue.RemoveFirst();
+                return data;
+            }
+            catch (MyLinkedListEmptyException) {
+                throw new MyQueueEmptyException();
+            }
         }
 
         public void Clear()

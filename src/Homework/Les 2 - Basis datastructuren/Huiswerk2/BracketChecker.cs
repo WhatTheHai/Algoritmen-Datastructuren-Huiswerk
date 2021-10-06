@@ -75,7 +75,7 @@ namespace AD
                 }
             }
 
-            return myStack.IsEmpty() != false;
+            return myStack.IsEmpty();
         }
 
     }
