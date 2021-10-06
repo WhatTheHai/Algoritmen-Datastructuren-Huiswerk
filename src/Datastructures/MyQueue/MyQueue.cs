@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace AD
 {
@@ -11,22 +12,24 @@ namespace AD
         }
         public bool IsEmpty()
         {
-            return true;
+            return linkedList.Size() == 0;
         }
 
         public void Enqueue(T data)
         {
-            throw new System.NotImplementedException();
+            linkedList.AddLast(data);
         }
 
         public T GetFront()
         {
-            throw new System.NotImplementedException();
+            return linkedList.GetFirst();
         }
 
         public T Dequeue()
         {
-            throw new System.NotImplementedException();
+            var data = linkedList.GetFirst();
+            linkedList.RemoveFirst();
+            return data;
         }
 
         public void Clear()
