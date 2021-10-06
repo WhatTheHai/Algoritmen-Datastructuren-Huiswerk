@@ -4,7 +4,15 @@
     {
         public static int Enen(int n)
         {
-            throw new System.NotImplementedException();
+            if (n == 0) {
+                return 0;
+            }
+
+            if (n == 1) {
+                return 1;
+            }
+
+            return Enen(n >> 1) + (n & 1);
         }
 
         public static void Run()

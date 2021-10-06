@@ -6,7 +6,17 @@ namespace AD
     {
         public static int OmEnOm(int n)
         {
-            throw new System.NotImplementedException();
+            if (n < 0) {
+                throw new OmEnOmNegativeValueException();
+            }
+            switch (n) {
+                case 0:
+                    return 0;
+                case 1:
+                    return 1;
+                default:
+                    return n + OmEnOm(n - 2);
+            }
         }
         public static void Run()
         {
