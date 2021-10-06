@@ -19,18 +19,20 @@ namespace AD
         public static bool CheckBrackets(string s) {
             var myStack = new MyStack<char>();
             foreach (var c in s) {
-                switch (c) {
+                switch (c)
+                {
                     case '(':
-                        myStack.Push('(');
-                        break;
-                    case ')' when myStack.Top() == '(':
+                        myStack.Push(c);
+                        continue;
+                    case ')' when myStack.IsEmpty() || myStack.Top() != '(':
+                        return false;
+                    case ')':
                         myStack.Pop();
                         break;
-                    case ')':
-                        return false;
                 }
             }
-            return true;
+
+            return myStack.IsEmpty() != false;
         }
 
 
@@ -49,7 +51,31 @@ namespace AD
         /// Returns False otherwise.</returns>
         public static bool CheckBrackets2(string s)
         {
-            throw new System.NotImplementedException();
+            var myStack = new MyStack<char>();
+            foreach (var c in s) {
+                switch (c) {
+                    case '(': 
+                    case '{': 
+                    case '[':
+                        myStack.Push(c);
+                        continue;
+                    case ')' when myStack.IsEmpty() || myStack.Top() != '(':
+                    case '}' when myStack.IsEmpty() || myStack.Top() != '{':
+                    case ']' when myStack.IsEmpty() || myStack.Top() != '[':
+                        return false;
+                    case ')':
+                        myStack.Pop();
+                        break;
+                    case '}':
+                        myStack.Pop();
+                        break;
+                    case ']':
+                        myStack.Pop();
+                        break;
+                }
+            }
+
+            return myStack.IsEmpty() != false;
         }
 
     }

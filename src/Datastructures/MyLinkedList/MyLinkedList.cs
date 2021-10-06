@@ -27,6 +27,21 @@ namespace AD
             size++;
         }
 
+        public void AddLast(T data)
+        {
+            MyLinkedListNode<T> newNode = new MyLinkedListNode<T>()
+            {
+                data = data
+            };
+            MyLinkedListNode<T> traverseNode = first;
+            while (traverseNode.next != null)
+            {
+                traverseNode = traverseNode.next;
+            }
+
+            traverseNode.next = newNode;
+        }
+
         public T GetFirst()
         {
             if (size == 0)
