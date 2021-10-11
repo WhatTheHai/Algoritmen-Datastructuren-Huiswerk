@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace AD
 {
@@ -6,12 +8,32 @@ namespace AD
     {
         public static string ForwardString(List<int> list, int from)
         {
-            throw new System.NotImplementedException();
+            if (from >= list.Count || list.Count == 0) {
+                return "";
+            }
+
+            return $"{list[from] } {ForwardString(list, from + 1)}";
+
+            // ALT try catch version
+            // try {
+            //     return $"{list[from]} {ForwardString(list, from + 1)}";
+            // }
+            // catch (ArgumentOutOfRangeException) {
+            //     return "";
+            // }
         }
         
         public static string BackwardString(List<int> list, int to)
         {
-            throw new System.NotImplementedException();
+            if (list.Count == 0 || to >= list.Count) {
+                return "";
+            }
+
+            if (to == list.Count - 1) {
+                return $"{list[to]}";
+            }
+
+            return $"{BackwardString(list, to + 1)} { list[to]}";
         }
 
         public static void Run()
