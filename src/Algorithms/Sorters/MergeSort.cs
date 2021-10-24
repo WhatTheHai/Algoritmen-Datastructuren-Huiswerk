@@ -25,12 +25,12 @@ namespace AD
         }
 
         private static void Merge(List<int> list, int[] tempArray, int left, int right, int stopRight) {
-            int stopLeft = stopRight - 1;
+            int stopLeft = right - 1;
             int temp = left;
             int numberOfElements = stopRight - left + 1;
 
             while (left <= stopLeft && right <= stopRight) {
-                if (list[left] <= list[stopRight]) {
+                if (list[left] <= list[right]) {
                     tempArray[temp++] = list[left++];
                 }
                 else {
@@ -38,10 +38,10 @@ namespace AD
                 }
             }
 
+            // Incase leftover
             while (left <= stopLeft) {
                 tempArray[temp++] = list[left++];
             }
-
             while (right <= stopRight) {
                 tempArray[temp++] = list[right++];
             }
