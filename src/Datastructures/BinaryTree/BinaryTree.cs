@@ -77,13 +77,8 @@ namespace AD
             }
         }
 
-        public string ToPrefixString()
-        {
-            if (root == null) {
-                return "NIL";
-            }
-
-            return ToPrefixString(root);
+        public string ToPrefixString() {
+            return root == null ? "NIL" : ToPrefixString(root);
         }
 
         public string ToPrefixString(BinaryNode<T> node) {
@@ -93,40 +88,80 @@ namespace AD
             return s + "]";
         }
 
-        public string ToInfixString()
-        {
-            if (root == null) {
-                return "NIL";
-            }
-            return "";
+        public string ToInfixString() {
+            return root == null ? "NIL" : ToInfixString(root);
         }
-
+        public string ToInfixString(BinaryNode<T> node) {
+            string s = "[ ";
+            s += node.left != null ? ToInfixString(node.left) + " " : "NIL ";
+            s += node.data + " ";
+            s += node.right != null ? ToInfixString(node.right) + " " : "NIL ";
+            return s + "]";
+        }
         public string ToPostfixString()
         {
-            if (root == null) {
-                return "NIL";
-            }
-            return "";
+            return root == null ? "NIL" : ToPostfixString(root);
         }
-
+        public string ToPostfixString(BinaryNode<T> node) {
+            string s = "[ ";
+            s += node.left != null ? ToPostfixString(node.left) + " " : "NIL ";
+            s += node.right != null ? ToPostfixString(node.right) + " " : "NIL ";
+            s += node.data + " ";
+            return s + "]";
+        }
 
         //----------------------------------------------------------------------
         // Interface methods : methods that have to be implemented for homework
         //----------------------------------------------------------------------
 
-        public int NumberOfLeaves()
-        {
-            throw new System.NotImplementedException();
+        public int NumberOfLeaves() {
+            return root != null ? NumberOfLeaves(root) : 0;
+        }
+
+        public int NumberOfLeaves(BinaryNode<T> node) {
+            if (node == null) {
+                return 0;
+            }
+
+            if (node.left == null && node.right == null) {
+                return 1;
+            }
+            return 0 + NumberOfLeaves(node.left) + NumberOfLeaves(node.right);
         }
 
         public int NumberOfNodesWithOneChild()
         {
-            throw new System.NotImplementedException();
+            return root != null ? NumberOfNodesWithOneChild(root) : 0;
         }
+        public int NumberOfNodesWithOneChild(BinaryNode<T> node) {
+            if (node == null) {
+                return 0;
+            }
 
+            if (node.left == null && node.right != null) {
+                return 1;
+            }
+
+            if (node.left != null && node.right == null) {
+                return 1;
+            }
+            return 0 + NumberOfNodesWithOneChild(node.left) + NumberOfNodesWithOneChild(node.right);
+        }
         public int NumberOfNodesWithTwoChildren()
         {
-            throw new System.NotImplementedException();
+            return root != null ? NumberOfNodesWithTwoChildren(root) : 0;
+        }
+        public int NumberOfNodesWithTwoChildren(BinaryNode<T> node) {
+            int counter = 0;
+
+            if (node == null) {
+                return 0;
+            }
+
+            if (node.left != null && node.right != null) {
+                counter++;
+            }
+            return 0 + counter + NumberOfNodesWithTwoChildren(node.left) + NumberOfNodesWithTwoChildren(node.right);
         }
     }
 }
