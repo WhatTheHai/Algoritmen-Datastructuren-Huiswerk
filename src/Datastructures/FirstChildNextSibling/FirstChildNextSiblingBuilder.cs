@@ -26,9 +26,24 @@ namespace AD
             return tree;
         }
 
-        public static IFirstChildNextSibling<string> CreateFirstChildNextSibling_18_3 ()
-        {
-            throw new System.NotImplementedException();
+        public static IFirstChildNextSibling<string> CreateFirstChildNextSibling_18_3 () {
+            FirstChildNextSibling<string> tree = new FirstChildNextSibling<string>();
+
+            FirstChildNextSiblingNode<string> k = new FirstChildNextSiblingNode<string>("k");
+            FirstChildNextSiblingNode<string> j = new FirstChildNextSiblingNode<string>("j", k, null);
+            FirstChildNextSiblingNode<string> i = new FirstChildNextSiblingNode<string>("i", null, j);
+            FirstChildNextSiblingNode<string> h = new FirstChildNextSiblingNode<string>("h");
+            FirstChildNextSiblingNode<string> g = new FirstChildNextSiblingNode<string>("g");
+            FirstChildNextSiblingNode<string> f = new FirstChildNextSiblingNode<string>("f", null, g);
+            FirstChildNextSiblingNode<string> e = new FirstChildNextSiblingNode<string>("e", i, null);
+            FirstChildNextSiblingNode<string> d = new FirstChildNextSiblingNode<string>("d", h, e);
+            FirstChildNextSiblingNode<string> c = new FirstChildNextSiblingNode<string>("c", null, d);
+            FirstChildNextSiblingNode<string> b = new FirstChildNextSiblingNode<string>("b", f, c);
+            FirstChildNextSiblingNode<string> a = new FirstChildNextSiblingNode<string>("a", b, null);
+
+            tree.root = a;
+
+            return tree;
         }
     }
 }

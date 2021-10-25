@@ -23,7 +23,16 @@ namespace AD
         //
         public static IBinaryTree<int> CreateBinaryTreeInt()
         {
-            throw new System.NotImplementedException();
+            BinaryTree<int> tree = new BinaryTree<int>();
+            BinaryNode<int> n1 = new BinaryNode<int>(1, null, null);
+            BinaryNode<int> n7 = new BinaryNode<int>(7, n1, null);
+            BinaryNode<int> n8 = new BinaryNode<int>(8, null, null);
+            BinaryNode<int> n2 = new BinaryNode<int>(2, n8, n7);
+            BinaryNode<int> n6 = new BinaryNode<int>(6, null, null);
+            BinaryNode<int> n5 = new BinaryNode<int>(5, n2, n6);
+
+            tree.root = n5;
+            return tree;
         }
 
         //

@@ -36,7 +36,12 @@ namespace AD
                 for (i = low, j = high - 1;;) {
                     //Find value on left side to swap with right
                     while (list[++i].CompareTo(pivot) < 0) ;
-                    while (pivot.CompareTo(list[--j]) < 0) ;
+                    while (pivot.CompareTo(list[--j]) <= 0) {
+                        //Out of bounds fix
+                        if (j == 0) {
+                            break;
+                        }
+                    };
                     if (i >= j)
                         break;
                     SwapReferences(list, i, j);

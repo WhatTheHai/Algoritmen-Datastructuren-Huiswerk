@@ -1,3 +1,5 @@
+using System;
+
 namespace AD
 {
     public partial class BinaryTree<T> : IBinaryTree<T>
@@ -8,14 +10,12 @@ namespace AD
         // Constructors
         //----------------------------------------------------------------------
 
-        public BinaryTree()
-        {
-            throw new System.NotImplementedException();
+        public BinaryTree() {
+            root = null;
         }
 
-        public BinaryTree(T rootItem)
-        {
-            throw new System.NotImplementedException();
+        public BinaryTree(T rootItem) {
+            root = new BinaryNode<T>(rootItem, null, null);
         }
 
 
@@ -23,49 +23,90 @@ namespace AD
         // Interface methods that have to be implemented for exam
         //----------------------------------------------------------------------
 
-        public BinaryNode<T> GetRoot()
-        {
-            throw new System.NotImplementedException();
+        public BinaryNode<T> GetRoot() {
+            return root;
         }
 
-        public int Size()
-        {
-            throw new System.NotImplementedException();
+        public int Size() {
+            return Size(root);
         }
 
-        public int Height()
-        {
-            throw new System.NotImplementedException();
+        public int Size(BinaryNode<T> node) {
+            if (node == null) {
+                return 0;
+            }
+
+            return 1 + Size(node.right) + Size(node.left);
         }
 
-        public void MakeEmpty()
-        {
-            throw new System.NotImplementedException();
+        public int Height() {
+            return Height(root);
         }
 
-        public bool IsEmpty()
-        {
-            throw new System.NotImplementedException();
+        public int Height(BinaryNode<T> node) {
+            if (node == null) {
+                return -1;
+            }
+
+            return 1 + Math.Max(Height(node.left), Height(node.right));
+        }
+
+        public void MakeEmpty() {
+            root = null;
+        }
+
+        public bool IsEmpty() {
+            return root == null;
         }
 
         public void Merge(T rootItem, BinaryTree<T> t1, BinaryTree<T> t2)
         {
-            throw new System.NotImplementedException();
+            if (t1.root == t2.root && t1.root != null) {
+                throw new ArgumentException();
+            }
+
+            root = new BinaryNode<T>(rootItem, t1.root, t2.root);
+
+            //Check if node is in one tree
+            if (this != t1) {
+                t1.root = null;
+            }
+
+            if (this != t2) {
+                t2.root = null;
+            }
         }
 
         public string ToPrefixString()
         {
-            throw new System.NotImplementedException();
+            if (root == null) {
+                return "NIL";
+            }
+
+            return ToPrefixString(root);
+        }
+
+        public string ToPrefixString(BinaryNode<T> node) {
+            string s = "[ " + node.data + " ";
+            s += node.left != null ? ToPrefixString(node.left) + " " : "NIL ";
+            s += node.right != null ? ToPrefixString(node.right) + " " : "NIL ";
+            return s + "]";
         }
 
         public string ToInfixString()
         {
-            throw new System.NotImplementedException();
+            if (root == null) {
+                return "NIL";
+            }
+            return "";
         }
 
         public string ToPostfixString()
         {
-            throw new System.NotImplementedException();
+            if (root == null) {
+                return "NIL";
+            }
+            return "";
         }
 
 
