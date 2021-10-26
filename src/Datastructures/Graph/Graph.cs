@@ -15,9 +15,8 @@ namespace AD
         // Constructor
         //----------------------------------------------------------------------
 
-        public Graph()
-        {
-            throw new System.NotImplementedException();
+        public Graph() {
+            vertexMap = new Dictionary<string, Vertex>();
         }
 
 

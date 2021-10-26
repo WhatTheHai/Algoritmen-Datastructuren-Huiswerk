@@ -13,33 +13,103 @@ namespace AD
         //----------------------------------------------------------------------
         // Constructor
         //----------------------------------------------------------------------
-        public PriorityQueue()
-        {
-            throw new System.NotImplementedException();
+        public PriorityQueue() {
+            size = 0;
+            array = new T[DEFAULT_CAPACITY + 1];
         }
 
         //----------------------------------------------------------------------
         // Interface methods that have to be implemented for exam
         //----------------------------------------------------------------------
-        public int Size()
-        {
-            throw new System.NotImplementedException();
+        public int Size() {
+            return size;
         }
 
-        public void Clear()
-        {
-            throw new System.NotImplementedException();
+        public void Clear() {
+            //No need to overwrite
+            size = 0;
         }
 
         public void Add(T x)
         {
-            throw new System.NotImplementedException();
+            if (size + 1 == array.Length) {
+                doubleArray();
+            }
+
+
+            //Percolate up
+            int hole = ++size;
+            //Add to dummy position to prevent going from root
+            array[0] = x;
+            while (compare(x, array[hole / 2]) < 0) {
+                array[hole] = array[hole / 2];
+                hole /= 2;
+            }
+            // for (; compare(x, array[hole / 2]) < 0; hole /= 2) {
+            //     array[hole] = array[hole / 2];
+            // }
+
+            array[hole] = x;
+        }
+
+        private int compare(T leftHalfSide, T rightHalfSide) {
+            return leftHalfSide.CompareTo(rightHalfSide);
+        }
+
+        public void doubleArray() {
+            T[] copyFromOld = array;
+
+            array = new T[size * 2 + 1];
+
+            for (int i = 0; i <= size; i++) {
+                array[i] = copyFromOld[i];
+            }
         }
 
         // Removes the smallest item in the priority queue
-        public T Remove()
-        {
-            throw new System.NotImplementedException();
+        public T Remove() {
+            T minItem = Element();
+            array[1] = array[size--];
+            percolateDown(1);
+            return minItem;
+        }
+
+        private void percolateDown(int hole) {
+            int child;
+            T temp = array[hole];
+            while (hole * 2 <= size) {
+                child = hole * 2;
+
+                if (child != size && compare(array[child + 1], array[child]) < 0) {
+                    child++;
+                }
+
+                if (compare(array[child], temp) < 0) {
+                    array[hole] = array[child];
+                }
+                else {
+                    break;
+                }
+
+                hole = child;
+            }
+            array[hole] = temp;
+        }
+
+        private T Element() {
+            if (size == 0) {
+                throw new PriorityQueueEmptyException();
+            }
+            return array[1];
+        }
+
+        public override string ToString() {
+            string s = "";
+            for (int i = 1; i <= size; i++) {
+                s += ((i != 1) ? " " : "") + array[i].ToString();
+            }
+
+            return s;
         }
 
 

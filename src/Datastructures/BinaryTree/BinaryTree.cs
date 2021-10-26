@@ -31,7 +31,7 @@ namespace AD
             return Size(root);
         }
 
-        public int Size(BinaryNode<T> node) {
+        private int Size(BinaryNode<T> node) {
             if (node == null) {
                 return 0;
             }
@@ -81,7 +81,7 @@ namespace AD
             return root == null ? "NIL" : ToPrefixString(root);
         }
 
-        public string ToPrefixString(BinaryNode<T> node) {
+        private string ToPrefixString(BinaryNode<T> node) {
             string s = "[ " + node.data + " ";
             s += node.left != null ? ToPrefixString(node.left) + " " : "NIL ";
             s += node.right != null ? ToPrefixString(node.right) + " " : "NIL ";
@@ -91,7 +91,7 @@ namespace AD
         public string ToInfixString() {
             return root == null ? "NIL" : ToInfixString(root);
         }
-        public string ToInfixString(BinaryNode<T> node) {
+        private string ToInfixString(BinaryNode<T> node) {
             string s = "[ ";
             s += node.left != null ? ToInfixString(node.left) + " " : "NIL ";
             s += node.data + " ";
@@ -102,7 +102,7 @@ namespace AD
         {
             return root == null ? "NIL" : ToPostfixString(root);
         }
-        public string ToPostfixString(BinaryNode<T> node) {
+        private string ToPostfixString(BinaryNode<T> node) {
             string s = "[ ";
             s += node.left != null ? ToPostfixString(node.left) + " " : "NIL ";
             s += node.right != null ? ToPostfixString(node.right) + " " : "NIL ";
@@ -118,7 +118,7 @@ namespace AD
             return root != null ? NumberOfLeaves(root) : 0;
         }
 
-        public int NumberOfLeaves(BinaryNode<T> node) {
+        private int NumberOfLeaves(BinaryNode<T> node) {
             if (node == null) {
                 return 0;
             }
@@ -133,7 +133,7 @@ namespace AD
         {
             return root != null ? NumberOfNodesWithOneChild(root) : 0;
         }
-        public int NumberOfNodesWithOneChild(BinaryNode<T> node) {
+        private int NumberOfNodesWithOneChild(BinaryNode<T> node) {
             if (node == null) {
                 return 0;
             }
@@ -151,7 +151,7 @@ namespace AD
         {
             return root != null ? NumberOfNodesWithTwoChildren(root) : 0;
         }
-        public int NumberOfNodesWithTwoChildren(BinaryNode<T> node) {
+        private int NumberOfNodesWithTwoChildren(BinaryNode<T> node) {
             int counter = 0;
 
             if (node == null) {
