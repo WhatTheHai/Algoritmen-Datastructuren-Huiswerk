@@ -45,10 +45,6 @@ namespace AD
                 array[hole] = array[hole / 2];
                 hole /= 2;
             }
-            // for (; compare(x, array[hole / 2]) < 0; hole /= 2) {
-            //     array[hole] = array[hole / 2];
-            // }
-
             array[hole] = x;
         }
 
@@ -68,6 +64,7 @@ namespace AD
 
         // Removes the smallest item in the priority queue
         public T Remove() {
+            //Basically returns array[1];
             T minItem = Element();
             array[1] = array[size--];
             percolateDown(1);

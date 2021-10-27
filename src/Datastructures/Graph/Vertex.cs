@@ -5,8 +5,7 @@ using System.Linq;
 
 namespace AD
 {
-    public partial class Vertex : IVertex
-    {
+    public partial class Vertex : IVertex, IComparable<Vertex> {
         public string name;
         public LinkedList<Edge> adj;
         public double distance;
@@ -22,9 +21,10 @@ namespace AD
         ///    Creates a new Vertex instance.
         /// </summary>
         /// <param name="name">The name of the new vertex</param>
-        public Vertex(string name)
-        {
-            throw new System.NotImplementedException();
+        public Vertex(string name) {
+            this.name = name;
+            this.adj = new LinkedList<Edge>();
+            this.Reset();
         }
 
 
@@ -32,33 +32,29 @@ namespace AD
         // Interface methods that have to be implemented for exam
         //----------------------------------------------------------------------
 
-        public string GetName()
-        {
-            throw new System.NotImplementedException();
+        public string GetName() {
+            return name;
         }
-        public LinkedList<Edge> GetAdjacents()
-        {
-            throw new System.NotImplementedException();
+        public LinkedList<Edge> GetAdjacents() {
+            return adj;
         }
 
-        public double GetDistance()
-        {
-            throw new System.NotImplementedException();
+        public double GetDistance() {
+            return distance;
         }
 
-        public Vertex GetPrevious()
-        {
-            throw new System.NotImplementedException();
+        public Vertex GetPrevious() {
+            return prev;
         }
 
-        public bool GetKnown()
-        {
-            throw new System.NotImplementedException();
+        public bool GetKnown() {
+            return known;
         }
 
-        public void Reset()
-        {
-            throw new System.NotImplementedException();
+        public void Reset() {
+            prev = null;
+            distance = Double.MaxValue;
+            known = false;
         }
 
 
@@ -73,9 +69,18 @@ namespace AD
         ///    calculated yet, the distance and the parantheses are omitted.</para>
         /// </summary>
         /// <returns>The string representation of this Graph instance</returns> 
-        public override string ToString()
-        {
-            throw new System.NotImplementedException();
+        public override string ToString() {
+            string s = name + (distance != Double.MaxValue ? $"({this.distance})" : "") + "[";
+            foreach (Edge e in adj.OrderBy(x => x.dest.name)) {
+                s += $"{e.dest.name}({e.cost})";
+            }
+            s += "]";
+
+            return s;
+        }
+
+        public int CompareTo(Vertex other) {
+            return distance.CompareTo(other.distance);
         }
     }
 }
