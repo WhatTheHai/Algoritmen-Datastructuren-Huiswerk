@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>AD</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\..\datastructures\Graph\Edge.cs" Link="Graph\Edge.cs" />
+    <Compile Include="..\..\..\datastructures\Graph\Graph.cs" Link="Graph\Graph.cs" />
+    <Compile Include="..\..\..\datastructures\Graph\GraphBuilder.cs" Link="Graph\GraphBuilder.cs" />
+    <Compile Include="..\..\..\datastructures\Graph\IGraph.cs" Link="Graph\IGraph.cs" />
+    <Compile Include="..\..\..\datastructures\Graph\IVertex.cs" Link="Graph\IVertex.cs" />
+    <Compile Include="..\..\..\datastructures\Graph\Vertex.cs" Link="Graph\Vertex.cs" />
+    <Compile Include="..\..\..\datastructures\PriorityQueue\IPriorityQueue.cs" Link="Graph\IPriorityQueue.cs" />
+    <Compile Include="..\..\..\datastructures\PriorityQueue\PriorityQueue.cs" Link="Graph\PriorityQueue.cs" />
+  </ItemGroup>
+
+</Project>
